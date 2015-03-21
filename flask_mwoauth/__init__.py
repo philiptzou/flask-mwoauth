@@ -35,11 +35,10 @@ class MWOAuthRemoteApp(OAuthRemoteApp):
 
 class MWOAuth(object):
     def __init__(self,
-                 name='mw.org',
                  base_url='https://www.mediawiki.org/w',
                  clean_url='https://www.mediawiki.org/wiki',
                  default_return_to='index',
-                 consumer_key=None, consumer_secret=None):
+                 consumer_key=None, consumer_secret=None, name='mw.org'):
         if not consumer_key or not consumer_secret:
             raise Exception('MWOAuthBlueprintFactory needs consumer key and secret')
         self.base_url = base_url
