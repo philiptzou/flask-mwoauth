@@ -35,6 +35,7 @@ class MWOAuthRemoteApp(OAuthRemoteApp):
 
 class MWOAuth(object):
     def __init__(self,
+                 name='mw.org',
                  base_url='https://www.mediawiki.org/w',
                  clean_url='https://www.mediawiki.org/wiki',
                  default_return_to='index',
@@ -46,7 +47,7 @@ class MWOAuth(object):
         self.default_return_to = default_return_to
 
         self.oauth = OAuth()
-        self.mwoauth = MWOAuthRemoteApp(self.oauth, 'mw.org',
+        self.mwoauth = MWOAuthRemoteApp(self.oauth, name,
             base_url = base_url + "/index.php",
             request_token_url=base_url + "/index.php",
             request_token_params = {'title': 'Special:OAuth/initiate',
@@ -56,7 +57,7 @@ class MWOAuth(object):
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
         )
-        self.oauth.remote_apps['mw.org'] = self.mwoauth
+        self.oauth.remote_apps[name] = self.mwoauth
 
         @self.mwoauth.tokengetter
         def get_mwo_token(token=None):
